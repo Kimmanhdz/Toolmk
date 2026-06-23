@@ -1,40 +1,137 @@
-javascript:(function(){
-    // ===== UI STYLES =====
-    const styles = `
-        #datcn-bypass-ui {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 320px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid #b91c1c;
-            box-shadow: 0 0 30px rgba(255, 140, 0, 0.4), inset 0 0 20px rgba(255, 140, 0, 0.1);
-            font-family: 'Segoe UI', sans-serif;
-            color: #fde68a;
-            z-index: 999999;
-            animation: datcn-slide 0.5s ease;
+(function () {
+    'use strict';
+
+    if (window.MKFinalScriptLoaded) return;
+    window.MKFinalScriptLoaded = true;
+
+    const originalSetTimeout = window.setTimeout;
+    const originalSetInterval = window.setInterval;
+
+    // Tăng tốc timer x5
+    (function speedUpTimers() {
+        console.log(
+            '%c[MK] đã tăng tốc bypass x5 | Script by MK',
+            'color:#a955ff;font-weight:bold'
+        );
+
+        const speedMultiplier = 5;
+
+        const applySpeedHack = () => {
+            window.setTimeout = (fn, delay = 0) =>
+                originalSetTimeout(fn, delay / speedMultiplier);
+
+            window.setInterval = (fn, delay = 0) =>
+                originalSetInterval(fn, delay / speedMultiplier);
+        };
+
+        applySpeedHack();
+        originalSetInterval(applySpeedHack, 100);
+    })();
+
+    function createNotification() {
+        const notificationId = 'MK-notification';
+
+        if (document.getElementById(notificationId)) return;
+
+        const container = document.createElement('div');
+        container.id = notificationId;
+
+        container.innerHTML = `
+            <div class="MK-content">
+                <div class="MK-title">MK Đã Kích Hoạt</div>
+                <div class="MK-message">Cảm ơn bạn đã sử dụng code by MK.</div>
+                <div class="MK-credit">Script by MK</div>
+            </div>
+            <div class="MK-close">&times;</div>
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = `
+            #MK-notification{
+                position:fixed;
+                top:25px;
+                right:25px;
+                background:rgba(30,35,50,.75);
+                color:#fff;
+                padding:12px 18px;
+                border-radius:12px;
+                z-index:2147483647;
+                backdrop-filter:blur(10px);
+                box-shadow:0 8px 32px rgba(0,0,0,.35);
+                font-family:Segoe UI,sans-serif;
+                display:flex;
+                align-items:center;
+                gap:12px;
+                opacity:0;
+                transform:translateX(120%);
+                transition:.5s;
+            }
+
+            #MK-notification.visible{
+                opacity:1;
+                transform:translateX(0);
+            }
+
+            .MK-title{
+                font-size:15px;
+                font-weight:600;
+            }
+
+            .MK-message{
+                font-size:13px;
+                color:#d0d0d0;
+            }
+
+            .MK-credit{
+                font-size:10px;
+                color:#999;
+                margin-top:4px;
+            }
+
+            .MK-close{
+                cursor:pointer;
+                font-size:22px;
+                margin-left:8px;
+            }
+        `;
+
+        document.head.appendChild(style);
+        document.body.appendChild(container);
+
+        const closeNotification = () => {
+            container.classList.remove('visible');
+
+            originalSetTimeout(() => {
+                container.remove();
+                style.remove();
+            }, 500);
+        };
+
+        container.querySelector('.MK-close')
+            .addEventListener('click', closeNotification);
+
+        originalSetTimeout(() => {
+            container.classList.add('visible');
+        }, 100);
+
+        originalSetTimeout(closeNotification, 5000);
+
+        console.log(
+            '%c[MK] thông báo đã hiển thị | Script by MK',
+            'color:#a955ff;font-weight:bold'
+        );
+    }
+
+    function init() {
+        if (document.body) {
+            createNotification();
+        } else {
+            originalSetTimeout(init, 100);
         }
-        @keyframes datcn-slide {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        #datcn-bypass-ui .datcn-header {
-            text-align: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 140, 0, 0.3);
-            padding-bottom: 10px;
-        }
-        #datcn-bypass-ui .datcn-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            background: linear-gradient(45deg, #b91c1c, #ff6b35);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
-        }
-        #datcn-bypass-ui .datcn-subtitle {
+    }
+
+    init();
+})();        #datcn-bypass-ui .datcn-subtitle {
             font-size: 0.75em;
             color: #b91c1c;
             opacity: 0.8;

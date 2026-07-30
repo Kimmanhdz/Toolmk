@@ -8,11 +8,11 @@
     const originalSetTimeout = window.setTimeout;
     const originalSetInterval = window.setInterval;
     
-    // Hàm tăng tốc độ timeout/interval lên 150 lần
+    // Hàm tăng tốc độ timeout/interval lên 50 lần
     (function speedUpTimers() {
-        console.log('%c[Mk] đã tăng tốc bypass (x150) | Script by Mk', 'color: #a955ff; font-weight: bold');
+        console.log('%c[Mk] đã tăng tốc bypass (x50) | Script by Mk', 'color: #a955ff; font-weight: bold');
         
-        const speedMultiplier = 150;
+        const speedMultiplier = 50;   // Đã chỉnh xuống 50
         
         const applySpeedHack = () => {
             window.setTimeout = (fn, delay) => originalSetTimeout(fn, delay / speedMultiplier);

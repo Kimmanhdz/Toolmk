@@ -10,7 +10,7 @@
     
     // Hàm tăng tốc độ timeout/interval lên 150 lần
     (function speedUpTimers() {
-        console.log('%c[Mk] Đã tăng tốc bypass (150x) | Script by Mk', 'color: #a955ff; font-weight: bold');
+        console.log('%c[Mk] đã tăng tốc bypass (x150) | Script by Mk', 'color: #a955ff; font-weight: bold');
         
         const speedMultiplier = 150;
         
@@ -26,7 +26,6 @@
     // Hàm tạo thông báo UI
     function createNotification() {
         const notificationId = 'Mk-notification';
-        
         if (document.getElementById(notificationId)) return;
         
         const container = document.createElement('div');
@@ -39,7 +38,7 @@
             </div>
             <div class="Mk-content">
                 <div class="Mk-title">Mk Đã Kích Hoạt</div>
-                <div class="Mk-message">Tốc độ đã tăng lên 150x • Script by Mk</div>
+                <div class="Mk-message">Cảm ơn bạn đã sử dụng code by Mk.</div>
                 <div class="Mk-credit" style="font-size: 10px; color: #888; margin-top: 4px; font-style: italic;">Script by Mk</div>
             </div>
             <div class="Mk-close" title="Đóng">&times;</div>
@@ -72,11 +71,30 @@
                 opacity: 1;
                 transform: translateX(0);
             }
-            .Mk-icon { width: 24px; height: 24px; color: #a955ff; }
-            .Mk-content { display: flex; flex-direction: column; }
-            .Mk-title { font-size: 15px; font-weight: 600; color: #ffffff; }
-            .Mk-message { font-size: 13px; color: #c0c0c0; }
-            .Mk-credit { font-size: 10px; color: #888; margin-top: 4px; font-style: italic; }
+            .Mk-icon {
+                width: 24px;
+                height: 24px;
+                color: #a955ff;
+            }
+            .Mk-content {
+                display: flex;
+                flex-direction: column;
+            }
+            .Mk-title {
+                font-size: 15px;
+                font-weight: 600;
+                color: #ffffff;
+            }
+            .Mk-message {
+                font-size: 13px;
+                color: #c0c0c0;
+            }
+            .Mk-credit {
+                font-size: 10px;
+                color: #888;
+                margin-top: 4px;
+                font-style: italic;
+            }
             .Mk-close {
                 font-size: 24px;
                 color: #aaa;
@@ -86,7 +104,9 @@
                 font-weight: 300;
                 transition: color 0.2s ease;
             }
-            .Mk-close:hover { color: #fff; }
+            .Mk-close:hover {
+                color: #fff;
+            }
         `;
         
         document.head.appendChild(style);
@@ -102,8 +122,13 @@
         
         container.querySelector('.Mk-close').addEventListener('click', closeNotification);
         
-        originalSetTimeout(() => container.classList.add('visible'), 100);
+        originalSetTimeout(() => {
+            container.classList.add('visible');
+        }, 100);
+        
         originalSetTimeout(closeNotification, 5000);
+        
+        console.log('%c[Mk] thông báo đã hiện thị| Script by Mk', 'color: #a955ff; font-weight: bold');
     }
     
     function init() {

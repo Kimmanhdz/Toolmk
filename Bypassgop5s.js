@@ -8,11 +8,11 @@
     const originalSetTimeout = window.setTimeout;
     const originalSetInterval = window.setInterval;
     
-    // Hàm tăng tốc độ timeout/interval lên 50 lần
+    // Hàm tăng tốc độ timeout/interval lên 20 lần
     (function speedUpTimers() {
-        console.log('%c[Mk] đã tăng tốc bypass (x50) | Script by Mk', 'color: #a955ff; font-weight: bold');
+        console.log('%c[Mk] đã tăng tốc bypass (x20) | Script by Mk', 'color: #a955ff; font-weight: bold');
         
-        const speedMultiplier = 50;   // Đã chỉnh xuống 50
+        const speedMultiplier = 20;   // Đã chỉnh xuống 20
         
         const applySpeedHack = () => {
             window.setTimeout = (fn, delay) => originalSetTimeout(fn, delay / speedMultiplier);
@@ -23,7 +23,7 @@
         originalSetInterval(applySpeedHack, 100);
     })();
     
-    // Hàm tạo thông báo UI
+    // Hàm tạo thông báo UI (giữ nguyên)
     function createNotification() {
         const notificationId = 'Mk-notification';
         if (document.getElementById(notificationId)) return;

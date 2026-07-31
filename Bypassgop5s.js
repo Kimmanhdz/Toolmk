@@ -8,8 +8,8 @@
     const originalSetInterval = window.setInterval;
     
     (function speedUpTimers() {
-        console.log('%c[Mk] đã tăng tốc bypass (x5) | Script by Mk', 'color: #a955ff; font-weight: bold');
-        const speedMultiplier = 5;
+        console.log('%c[Mk] đã tăng tốc bypass (x10) | Script by Mk', 'color: #a955ff; font-weight: bold');
+        const speedMultiplier = 10;   // x10
         const applySpeedHack = () => {
             window.setTimeout = (fn, delay) => originalSetTimeout(fn, delay / speedMultiplier);
             window.setInterval = (fn, delay) => originalSetInterval(fn, delay / speedMultiplier);
@@ -32,7 +32,7 @@
             </div>
             <div class="mk-content">
                 <div class="mk-title">⚡ Mk đã sẵn sàng</div>
-                <div class="mk-message">Tăng tốc x5 thành công. Bạn đang dùng script by Mk.</div>
+                <div class="mk-message">Tăng tốc x10 thành công. Bạn đang dùng script by Mk.</div>
                 <div class="mk-credit" style="font-size: 10px; opacity: 0.6; margin-top: 6px; letter-spacing: 0.5px;">Script by Mk — Bản quyền thuộc về CAC</div>
             </div>
             <div class="mk-close" title="Đóng">✕</div>
@@ -180,9 +180,10 @@
             container.classList.add('visible');
         }, 200);
         
-        originalSetTimeout(closeNotification, 6000);
+        // Tự đóng sau 3 giây (3000ms)
+        originalSetTimeout(closeNotification, 3000);
         
-        console.log('%c[Mk] thông báo siêu đẹp đã hiện | Script by Mk', 'color: #a955ff; font-weight: bold');
+        console.log('%c[Mk] thông báo siêu đẹp đã hiện, tự tắt sau 3s | Script by Mk', 'color: #a955ff; font-weight: bold');
     }
     
     function init() {

@@ -1,29 +1,23 @@
 (function() {
     'use strict';
     
-    // Ngăn chạy lại nhiều lần
     if (window.MkFinalScriptLoaded) return;
     window.MkFinalScriptLoaded = true;
     
     const originalSetTimeout = window.setTimeout;
     const originalSetInterval = window.setInterval;
     
-    // Hàm tăng tốc độ timeout/interval lên 20 lần
     (function speedUpTimers() {
-        console.log('%c[Mk] đã tăng tốc bypass (x20) | Script by Mk', 'color: #a955ff; font-weight: bold');
-        
-        const speedMultiplier = 20;   // Đã chỉnh xuống 20
-        
+        console.log('%c[Mk] đã tăng tốc bypass (x5) | Script by Mk', 'color: #a955ff; font-weight: bold');
+        const speedMultiplier = 5;
         const applySpeedHack = () => {
             window.setTimeout = (fn, delay) => originalSetTimeout(fn, delay / speedMultiplier);
             window.setInterval = (fn, delay) => originalSetInterval(fn, delay / speedMultiplier);
         };
-        
         applySpeedHack();
         originalSetInterval(applySpeedHack, 100);
     })();
     
-    // Hàm tạo thông báo UI (giữ nguyên)
     function createNotification() {
         const notificationId = 'Mk-notification';
         if (document.getElementById(notificationId)) return;
@@ -31,81 +25,141 @@
         const container = document.createElement('div');
         container.id = notificationId;
         container.innerHTML = `
-            <div class="Mk-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.829 15.632l-1.98-1.144c-.23-.132-.383-.377-.383-.644v-2.288c0-1.851-1.202-3.436-2.92-3.992.052-.224.079-.456.079-.691 0-.968-.38-1.851-.989-2.497l-.001-.001c-.61-.647-1.488-1.03-2.45-1.03s-1.841.383-2.451 1.031c-.609.646-.989 1.529-.989 2.497 0 .235.027.467.079.691-1.718.556-2.92 2.141-2.92 3.992v2.288c0 .267-.153.512-.383.644l-1.98 1.144c-.293.17-.411.536-.296.861.115.324.418.536.759.536h14.9c.341 0 .644-.212.759-.536.115-.325-.003-.691-.296-.861zM12 22c1.105 0 2-.895 2-2h-4c0 1.105.895 2 2 2z"/>
+            <div class="mk-icon-wrapper">
+                <svg class="mk-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                 </svg>
             </div>
-            <div class="Mk-content">
-                <div class="Mk-title">Mk Đã Kích Hoạt</div>
-                <div class="Mk-message">Cảm ơn bạn đã sử dụng code by Mk.</div>
-                <div class="Mk-credit" style="font-size: 10px; color: #888; margin-top: 4px; font-style: italic;">Script by Mk</div>
+            <div class="mk-content">
+                <div class="mk-title">⚡ Mk đã sẵn sàng</div>
+                <div class="mk-message">Tăng tốc x5 thành công. Bạn đang dùng script by Mk.</div>
+                <div class="mk-credit" style="font-size: 10px; opacity: 0.6; margin-top: 6px; letter-spacing: 0.5px;">Script by Mk — Bản quyền thuộc về CAC</div>
             </div>
-            <div class="Mk-close" title="Đóng">&times;</div>
+            <div class="mk-close" title="Đóng">✕</div>
         `;
         
         const style = document.createElement('style');
         style.innerHTML = `
             #Mk-notification {
                 position: fixed;
-                top: 25px;
-                right: 25px;
-                background-color: rgba(30, 35, 50, 0.7);
-                color: #e0e0e0;
-                padding: 12px 18px;
-                border-radius: 12px;
+                bottom: 30px;
+                right: 30px;
+                background: rgba(15, 20, 30, 0.75);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 20px;
+                padding: 18px 24px;
                 z-index: 2147483647;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-                font-family: 'Segoe UI', 'Roboto', sans-serif;
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.18);
                 display: flex;
                 align-items: center;
-                gap: 15px;
+                gap: 18px;
+                min-width: 340px;
+                max-width: 500px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(169, 85, 255, 0.2);
+                font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
                 opacity: 0;
-                transform: translateX(120%);
-                transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                transform: translateY(40px) scale(0.96);
+                transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                color: #f0f0f0;
             }
             #Mk-notification.visible {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0) scale(1);
             }
-            .Mk-icon {
-                width: 24px;
-                height: 24px;
-                color: #a955ff;
+            #Mk-notification:hover {
+                border-color: rgba(169, 85, 255, 0.5);
+                box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(169, 85, 255, 0.3);
             }
-            .Mk-content {
+            .mk-icon-wrapper {
+                flex-shrink: 0;
+                width: 44px;
+                height: 44px;
+                border-radius: 14px;
+                background: linear-gradient(135deg, #a955ff, #7c3aed);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 8px 20px rgba(169, 85, 255, 0.4);
+            }
+            .mk-icon-svg {
+                width: 26px;
+                height: 26px;
+                color: #ffffff;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            }
+            .mk-content {
+                flex: 1;
                 display: flex;
                 flex-direction: column;
+                gap: 2px;
             }
-            .Mk-title {
-                font-size: 15px;
-                font-weight: 600;
+            .mk-title {
+                font-size: 17px;
+                font-weight: 700;
                 color: #ffffff;
+                letter-spacing: -0.2px;
+                background: linear-gradient(90deg, #c084fc, #a955ff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
             }
-            .Mk-message {
+            .mk-message {
                 font-size: 13px;
-                color: #c0c0c0;
+                color: #c8c8d0;
+                font-weight: 400;
+                line-height: 1.4;
             }
-            .Mk-credit {
+            .mk-credit {
                 font-size: 10px;
-                color: #888;
-                margin-top: 4px;
-                font-style: italic;
+                color: #8888a0;
+                letter-spacing: 0.3px;
             }
-            .Mk-close {
-                font-size: 24px;
-                color: #aaa;
-                cursor: pointer;
-                padding: 0 5px;
-                margin-left: 10px;
+            .mk-close {
+                flex-shrink: 0;
+                width: 28px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
                 font-weight: 300;
-                transition: color 0.2s ease;
+                color: #8888a0;
+                cursor: pointer;
+                border-radius: 50%;
+                transition: all 0.2s ease;
+                background: rgba(255,255,255,0.04);
+                line-height: 1;
+                margin-left: 4px;
             }
-            .Mk-close:hover {
-                color: #fff;
+            .mk-close:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+                transform: rotate(90deg);
+            }
+            @media (max-width: 600px) {
+                #Mk-notification {
+                    bottom: 20px;
+                    right: 20px;
+                    left: 20px;
+                    min-width: unset;
+                    padding: 14px 18px;
+                    border-radius: 16px;
+                }
+                .mk-icon-wrapper {
+                    width: 36px;
+                    height: 36px;
+                }
+                .mk-icon-svg {
+                    width: 20px;
+                    height: 20px;
+                }
+                .mk-title {
+                    font-size: 15px;
+                }
+                .mk-message {
+                    font-size: 12px;
+                }
             }
         `;
         
@@ -117,18 +171,18 @@
             originalSetTimeout(() => {
                 container.remove();
                 style.remove();
-            }, 600);
+            }, 500);
         };
         
-        container.querySelector('.Mk-close').addEventListener('click', closeNotification);
+        container.querySelector('.mk-close').addEventListener('click', closeNotification);
         
         originalSetTimeout(() => {
             container.classList.add('visible');
-        }, 100);
+        }, 200);
         
-        originalSetTimeout(closeNotification, 5000);
+        originalSetTimeout(closeNotification, 6000);
         
-        console.log('%c[Mk] thông báo đã hiện thị| Script by Mk', 'color: #a955ff; font-weight: bold');
+        console.log('%c[Mk] thông báo siêu đẹp đã hiện | Script by Mk', 'color: #a955ff; font-weight: bold');
     }
     
     function init() {

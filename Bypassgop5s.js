@@ -9,7 +9,7 @@
     
     (function speedUpTimers() {
         console.log('%c[Mk] đã tăng tốc bypass (x5) | Script by Mk', 'color: #a955ff; font-weight: bold');
-        const speedMultiplier = 5;   // x5 như mày bảo
+        const speedMultiplier = 2.5;   // x2.5 như mày bảo
         const applySpeedHack = () => {
             window.setTimeout = (fn, delay) => originalSetTimeout(fn, delay / speedMultiplier);
             window.setInterval = (fn, delay) => originalSetInterval(fn, delay / speedMultiplier);
